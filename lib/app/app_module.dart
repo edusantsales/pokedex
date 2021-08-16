@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'app.dart';
 import 'modules/home/home_module.dart';
 import 'shared/services/local_storage_service.dart';
 
@@ -9,7 +10,11 @@ class AppModule extends Module {
   List<Bind<Object>> get binds {
     return [
       Bind.lazySingleton((i) => LocalStorageService()),
-      Bind.lazySingleton((i) => Dio()),
+      Bind.lazySingleton(
+        (i) => Dio(
+          BaseOptions(baseUrl: AppEnvironment.getInstance()!.apiBaseUrl),
+        ),
+      ),
     ];
   }
 
