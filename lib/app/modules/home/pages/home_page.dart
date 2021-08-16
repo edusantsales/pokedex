@@ -83,8 +83,7 @@ class _HomePageState extends State<HomePage> {
                                             onTap: () {},
                                             child: PokeItem(
                                               index: index,
-                                              name: pokemon.name,
-                                              image: pokemon.image,
+                                              pokemon: pokemon,
                                             ),
                                           ),
                                         ),

@@ -47,8 +47,10 @@ class HomeViewModel {
       var pokemon = Pokemon(
         id: result.id!,
         name: result.name!,
-        image:
-            Image.network(result.sprites!.other.officialArtwork.frontDefault),
+        image: Image.network(
+          result.sprites!.other.officialArtwork.frontDefault,
+        ),
+        types: result.types!.map((e) => e.type.name).toList(),
       );
       if (!pokemons.contains(pokemon.id)) {
         pokemons.add(pokemon);
