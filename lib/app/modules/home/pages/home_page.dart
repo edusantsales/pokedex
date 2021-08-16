@@ -1,56 +1,108 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:pokedex/app/app.dart';
+import 'package:pokedex/app/modules/home/home_view_model.dart';
 import 'package:pokedex/app/shared/components/components.dart';
+import 'package:pokedex/app/shared/components/poke_item.dart';
+import 'package:rx_notifier/rx_notifier.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final _viewmodel = Modular.get<HomeViewModel>();
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    _viewmodel.getPokemons();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent) {
+        _viewmodel.nextPage();
+      }
+    });
+    rxObserver(
+      () => _viewmodel.error.value.map(
+        (e) => _viewmodel.showSnackBar(context, e),
+      ),
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      body: LayoutBuilder(builder: (context, constraints) {
-        return SafeArea(
-          child: Stack(
-            alignment: Alignment.topCenter,
-            clipBehavior: Clip.none,
-            children: [
-              Positioned(
-                top: -(constraints.maxHeight / 5),
-                left: constraints.maxWidth * 0.55,
-                child: Opacity(
-                  opacity: 0.1,
-                  child: Image.asset(
-                    AppImages.blackPokeball,
-                    height: constraints.maxHeight * 0.65,
-                    width: constraints.maxWidth * 0.65,
-                  ),
-                ),
-              ),
-              AppBarHome(),
-              Container(
-                child: Column(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SafeArea(
+            child: Stack(
+              alignment: Alignment.topCenter,
+              clipBehavior: Clip.none,
+              children: [
+                PokeAppBar(),
+                Column(
                   children: [
-                    Container(height: constraints.maxHeight * 0.35),
+                    SizedBox(height: constraints.maxHeight * 0.3),
                     Expanded(
                       flex: 1,
-                      child: Container(
-                        child: ListView(
-                          children: [
-                            ListTile(
-                              title: Text("Pokemon"),
-                            ),
-                          ],
-                        ),
+                      child: RxBuilder(
+                        builder: (context) {
+                          _viewmodel.loading();
+                          return (_viewmodel.pokemons.isEmpty)
+                              ? _viewmodel.loadingWidget.value
+                              : AnimationLimiter(
+                                  child: GridView.builder(
+                                    controller: _scrollController,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                    ),
+                                    itemCount: _viewmodel.pokemons.length,
+                                    itemBuilder: (context, index) {
+                                      var pokemon = _viewmodel.pokemons[index];
+                                      return AnimationConfiguration
+                                          .staggeredGrid(
+                                        columnCount: 2,
+                                        duration: Duration(milliseconds: 400),
+                                        position: index,
+                                        child: ScaleAnimation(
+                                          child: GestureDetector(
+                                            onTap: () {},
+                                            child: PokeItem(
+                                              index: index,
+                                              name: pokemon.name,
+                                              image: pokemon.image,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    padding: const EdgeInsets.all(8),
+                                  ),
+                                );
+                        },
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
-        );
-      }),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
