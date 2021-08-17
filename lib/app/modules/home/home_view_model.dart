@@ -89,4 +89,11 @@ class HomeViewModel {
       ),
     ).then((value) => loadingWidget.value = value);
   }
+
+  VoidCallback loadDetailPage(int index, Pokemon pokemon) {
+    var pokemap = {"index": index, "pokemon": pokemon, "pokemons": pokemons};
+    return () {
+      Modular.to.pushNamed("/pokemon", arguments: pokemap);
+    };
+  }
 }
