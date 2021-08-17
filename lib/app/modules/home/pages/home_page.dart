@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.topCenter,
               clipBehavior: Clip.none,
               children: [
-                PokeAppBar(),
+                PokeHomeAppBar(),
                 Column(
                   children: [
                     SizedBox(height: constraints.maxHeight * 0.3),
