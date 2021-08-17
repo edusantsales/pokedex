@@ -4,9 +4,10 @@ import 'package:fpdart/fpdart.dart';
 import 'package:pokedex/app/shared/dtos/dtos.dart';
 import 'package:pokedex/app/shared/exceptions/exceptions.dart';
 import 'package:pokedex/app/shared/repositories/repositories.dart';
+import 'package:pokedex/env.dart';
 
 void main() {
-  final dio = Dio();
+  final dio = Dio(BaseOptions(baseUrl: POKE_API));
   final repository = PokemonRepository(dio);
 
   test("Deve retornar os 20 primeiros pokemons da lista.", () async {
