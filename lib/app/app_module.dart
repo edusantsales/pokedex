@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:pokedex/app/modules/detail/detail_module.dart';
 
 import 'app.dart';
 import 'modules/home/home_module.dart';
@@ -23,6 +24,7 @@ class AppModule extends Module {
     return [
       // ModuleRoute("/", module: SplashModule()),
       ModuleRoute("/", module: HomeModule()),
+      ModuleRoute("/pokemon", module: DetailModule()),
     ];
   }
 }
