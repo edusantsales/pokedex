@@ -23,12 +23,15 @@ class PokeItem extends StatelessWidget {
             children: [
               Container(
                 alignment: Alignment.bottomRight,
-                child: Opacity(
-                  opacity: 0.2,
-                  child: Image.asset(
-                    AppImages.whitePokeball,
-                    height: constraints.maxHeight * 0.5,
-                    width: constraints.maxWidth * 0.5,
+                child: Hero(
+                  tag: pokemon.name + "-pokeball",
+                  child: Opacity(
+                    opacity: 0.2,
+                    child: Image.asset(
+                      AppImages.whitePokeball,
+                      height: constraints.maxHeight * 0.5,
+                      width: constraints.maxWidth * 0.5,
+                    ),
                   ),
                 ),
               ),
@@ -37,7 +40,10 @@ class PokeItem extends StatelessWidget {
                 child: Container(
                   height: constraints.maxHeight * 0.5,
                   width: constraints.maxWidth * 0.5,
-                  child: this.pokemon.image,
+                  child: Hero(
+                    tag: pokemon.name,
+                    child: Image.network(this.pokemon.imageUrl),
+                  ),
                 ),
               ),
               Container(

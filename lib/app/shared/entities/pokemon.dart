@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class Pokemon {
   final int id;
   final String name;
-  final Widget image;
+  final String imageUrl;
   final List<String> types;
 
   Pokemon({
     required this.id,
     required this.name,
-    required this.image,
+    required this.imageUrl,
     required this.types,
   });
 
@@ -69,9 +69,9 @@ class Pokemon {
     return other is Pokemon &&
         other.id == id &&
         other.name == name &&
-        other.image == image;
+        other.imageUrl == imageUrl;
   }
 
   @override
-  int get hashCode => id.hashCode ^ name.hashCode ^ image.hashCode;
+  int get hashCode => id.hashCode ^ name.hashCode ^ imageUrl.hashCode;
 }

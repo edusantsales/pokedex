@@ -29,6 +29,12 @@ dev_dependencies:
     sdk: flutter
   mocktail: ^0.1.4
 
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "lib/assets/images/icon.png"
+  image_path_android: "lib/assets/images/icon.png"
+
 flutter:
 
   uses-material-design: true
