@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "configurations": [
         {
             "name": "development",
@@ -11,13 +11,14 @@
             "name": "homologation",
             "request": "launch",
             "type": "dart",
-            "program": "lib/environments/homologation.dart"
+            "program": "lib/main.dart"
         },
         {
             "name": "production",
             "request": "launch",
             "type": "dart",
-            "program": "lib/environments/production.dart"
+            "args": ["--release"],
+            "program": "lib/main.dart"
         }
     ]
 }
