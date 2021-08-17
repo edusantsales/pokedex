@@ -4,14 +4,9 @@ import 'package:pokedex/app/app_text_styles.dart';
 import 'package:pokedex/app/shared/entities/pokemon.dart';
 
 class PokeItem extends StatelessWidget {
-  final int index;
   final Pokemon pokemon;
 
-  const PokeItem({
-    Key? key,
-    required this.index,
-    required this.pokemon,
-  }) : super(key: key);
+  const PokeItem({Key? key, required this.pokemon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
