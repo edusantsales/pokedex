@@ -80,11 +80,11 @@ class _HomePageState extends State<HomePage> {
                                         position: index,
                                         child: ScaleAnimation(
                                           child: GestureDetector(
-                                            onTap: () {},
-                                            child: PokeItem(
-                                              index: index,
-                                              pokemon: pokemon,
+                                            onTap: _viewmodel.loadDetailPage(
+                                              index,
+                                              pokemon,
                                             ),
+                                            child: PokeItem(pokemon: pokemon),
                                           ),
                                         ),
                                       );
