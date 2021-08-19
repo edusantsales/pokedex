@@ -6,10 +6,10 @@ import 'package:pokedex/app/shared/dtos/dtos.dart';
 import 'package:pokedex/app/shared/exceptions/exceptions.dart';
 import 'package:pokedex/app/shared/interfaces/interfaces.dart';
 
-class HomeRepositoryMock extends Mock implements IPokemonRepository {}
+class PokemonRepositoryMock extends Mock implements IPokemonRepository {}
 
 void main() {
-  final repository = HomeRepositoryMock();
+  final repository = PokemonRepositoryMock();
   final usecase = GetAllPokemons(repository);
 
   test("Deve retornar a lista de pokemons com sucesso.", () async {
