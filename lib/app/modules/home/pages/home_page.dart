@@ -4,6 +4,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:pokedex/app/app.dart';
 import 'package:pokedex/app/modules/home/components/home_components.dart';
 import 'package:pokedex/app/modules/home/home_view_model.dart';
+import 'package:pokedex/app/shared/components/components.dart';
 import 'package:rx_notifier/rx_notifier.dart';
 
 class HomePage extends StatefulWidget {
