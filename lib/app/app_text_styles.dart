@@ -28,14 +28,6 @@ class AppTextStyles {
     );
   }
 
-  static TextStyle textDarkPrimary(double fontSize) {
-    return GoogleFonts.notoSans(
-      color: AppColors.darkPrimary,
-      fontSize: fontSize,
-      fontWeight: FontWeight.w400,
-    );
-  }
-
   static TextStyle textAccent(double fontSize) {
     return GoogleFonts.notoSans(
       color: AppColors.accent,
@@ -63,14 +55,6 @@ class AppTextStyles {
   static TextStyle textSemiPrimary(double fontSize) {
     return GoogleFonts.notoSans(
       color: AppColors.primary,
-      fontSize: fontSize,
-      fontWeight: FontWeight.w600,
-    );
-  }
-
-  static TextStyle textSemiDarkPrimary(double fontSize) {
-    return GoogleFonts.notoSans(
-      color: AppColors.darkPrimary,
       fontSize: fontSize,
       fontWeight: FontWeight.w600,
     );

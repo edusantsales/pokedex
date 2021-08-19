@@ -17,6 +17,12 @@ class LocalStorageService implements ILocalStorage {
   }
 
   @override
+  Future getList(String key) async {
+    var shared = await SharedPreferences.getInstance();
+    return shared.getStringList(key);
+  }
+
+  @override
   Future put(String key, value) async {
     var shared = await SharedPreferences.getInstance();
     if (value is bool) {
@@ -30,5 +36,11 @@ class LocalStorageService implements ILocalStorage {
     } else {
       shared.setString(key, json.encode(value));
     }
+  }
+
+  @override
+  Future putList(String key, value) async {
+    var shared = await SharedPreferences.getInstance();
+    return shared.setStringList(key, value);
   }
 }
