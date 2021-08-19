@@ -5,14 +5,16 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:pokedex/app/shared/entities/entities.dart';
 import 'package:pokedex/app/shared/exceptions/exceptions.dart';
+import 'package:pokedex/app/shared/services/services.dart';
 import 'package:rx_notifier/rx_notifier.dart';
 
 import 'usecases/get_specie.dart';
 
 class DetailViewModel {
+  final _localStorage = Modular.get<LocalStorageService>();
   final _getSpecie = Modular.get<GetSpecie>();
 
-  var pokemonIndex = 0;
+  var pokemonIndex = RxNotifier(0);
   var pokemon = RxNotifier(
     Pokemon(
       id: 0,
@@ -44,6 +46,7 @@ class DetailViewModel {
     ),
   );
   var error = RxNotifier(none<AppException>());
+  var isFavorite = RxNotifier(false);
 
   VoidCallback loadHomePage() {
     return () {
@@ -101,5 +104,18 @@ class DetailViewModel {
       total += status;
     });
     return total;
+  }
+
+  VoidCallback onPressedFavoritePokemon() {
+    var favorites = <Pokemon>[];
+    pokemon.value.isFavorite = !pokemon.value.isFavorite;
+    favorites.add(pokemon.value);
+    return () async {
+      rxObserver(() => pokemon.value.isFavorite);
+      await _localStorage.putList(
+        "favorites",
+        favorites.map((e) => e.toJson()).toList(),
+      );
+    };
   }
 }
