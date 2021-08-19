@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:pokedex/app/modules/detail/usecases/get_specie.dart';
 import 'package:pokedex/app/modules/home/home_view_model.dart';
 import 'package:pokedex/app/shared/repositories/repositories.dart';
 
@@ -13,6 +14,7 @@ class HomeModule extends Module {
       Bind.lazySingleton((i) => HomeViewModel()),
       Bind.lazySingleton((i) => GetAllPokemons(i())),
       Bind.lazySingleton((i) => GetPokemon(i())),
+      Bind.lazySingleton((i) => GetSpecie(i())),
       Bind.lazySingleton((i) => PokemonRepository(i())),
     ];
   }

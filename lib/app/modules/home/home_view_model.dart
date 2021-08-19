@@ -46,9 +46,16 @@ class HomeViewModel {
       var result = await getPokemonDetail(pokemonDTO.name);
       var pokemon = Pokemon(
         id: result.id!,
-        name: result.name!,
+        abilites: result.abilities!.map((e) => e.ability.name).toList(),
+        baseExperience: result.baseExperience!,
+        height: result.height!,
         imageUrl: result.sprites!.other.officialArtwork.frontDefault,
+        isDefault: result.isDefault!,
+        name: result.name!,
+        order: result.order!,
+        stats: result.stats!.map((e) => e.baseStat).toList(),
         types: result.types!.map((e) => e.type.name).toList(),
+        weight: result.weight!,
       );
       if (!pokemons.contains(pokemon.id)) {
         pokemons.add(pokemon);
