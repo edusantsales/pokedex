@@ -1,16 +1,46 @@
-# pokedex
+<h1 align="center">
+    Flutter Pokedex
+</h1>
 
-A new Flutter project.
+<h4 align="center">
+  Aplicativo para consulta de informações sobre pokemons
+</h4>
 
-## Getting Started
+<p align="center">
+  <a href="#rocket-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#information_source-como-executar-o-projeto">Como executar o projeto</a>
+</p>
 
-This project is a starting point for a Flutter application.
+<!-- <p align="center">
+  <img alt="Preview" src="preview.gif" width="300">
+</p> -->
 
-A few resources to get you started if this is your first Flutter project:
+## :rocket: Tecnologias
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-  [Dart](https://dart.dev/)
+-  [Flutter](https://flutter.dev/)
+-  [VS Code](https://code.visualstudio.com/)
+
+## :information_source: Como executar o projeto
+
+Para clonar e executar esta aplicação, você irá precisar do [Git](https://git-scm.com), [Flutter v2.2.0](https://flutter.dev/) ou maior + [Dart v2.13.0](https://dart.dev/) ou maior instalado no seu computador. Para os comandos no terminal:
+
+```bash
+# Clonar este repositorio do Gitlab
+$ git clone https://github.com/edusantsales/pokedex.git
+
+# Acessar a pasta do projeto em seu computador
+$ cd pokedex
+
+# Instalar as dependencias do projeto
+$ flutter pub get
+
+# Verificar a instalação do Flutter em seu computador
+$ flutter doctor
+
+# Executar o app no seu dispositivo conectado ao computador
+$ flutter run
+```
+
