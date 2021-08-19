@@ -31,11 +31,11 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    _viewmodel.pokemonIndex = widget.pokemap["index"] as int;
+    _viewmodel.pokemonIndex.value = widget.pokemap["index"] as int;
     _viewmodel.pokemon.value = widget.pokemap["pokemon"] as Pokemon;
     _viewmodel.pokemons = widget.pokemap["pokemons"] as RxList<Pokemon>;
     _pageController = PageController(
-      initialPage: _viewmodel.pokemonIndex,
+      initialPage: _viewmodel.pokemonIndex.value,
       viewportFraction: 0.5,
     );
     _initSpinPokeballAnimation();
@@ -94,10 +94,18 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                             ),
                           ),
                         ),
-                        IconButton(
-                          icon: Icon(Icons.favorite_border,
-                              color: AppColors.white),
-                          onPressed: () {},
+                        RxBuilder(
+                          builder: (context) {
+                            return IconButton(
+                              icon: Icon(
+                                _viewmodel.pokemons[_viewmodel.pokemonIndex.value].isFavorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: AppColors.white,
+                              ),
+                              onPressed: _viewmodel.onPressedFavoritePokemon(),
+                            );
+                          }
                         ),
                       ],
                     ),
@@ -184,12 +192,12 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                       return Stack(
                         alignment: Alignment.center,
                         children: [
-                          index == _viewmodel.pokemonIndex
+                          index == _viewmodel.pokemonIndex.value
                               ? RotationTransition(
                                   turns: Tween(begin: 0.0, end: 1.0)
                                       .animate(_spinPokeball),
                                   child: Hero(
-                                    tag: index == _viewmodel.pokemonIndex
+                                    tag: index == _viewmodel.pokemonIndex.value
                                         ? _viewmodel.pokemon.value.name +
                                             "-pokeball"
                                         : "pokeball-$index",
@@ -208,15 +216,15 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                             curve: Curves.bounceInOut,
                             duration: Duration(milliseconds: 500),
                             padding: EdgeInsets.all(
-                                index == _viewmodel.pokemonIndex ? 0 : 60),
+                                index == _viewmodel.pokemonIndex.value ? 0 : 60),
                             child: Hero(
-                              tag: index == _viewmodel.pokemonIndex
+                              tag: index == _viewmodel.pokemonIndex.value
                                   ? _viewmodel.pokemon.value.name
                                   : "pokemon-$index",
                               child: IgnorePointer(
                                 child: Image.network(
                                   _viewmodel.pokemons[index].imageUrl,
-                                  color: index == _viewmodel.pokemonIndex
+                                  color: index == _viewmodel.pokemonIndex.value
                                       ? null
                                       : Colors.black.withOpacity(0.5),
                                 ),
@@ -227,7 +235,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                       );
                     },
                     onPageChanged: (index) {
-                      _viewmodel.pokemonIndex = index;
+                      _viewmodel.pokemonIndex.value = index;
                       _viewmodel.pokemon.value = _viewmodel.pokemons[index];
                       _viewmodel.getPokemonSpecieInfo(
                         _viewmodel.pokemon.value.id.toString(),

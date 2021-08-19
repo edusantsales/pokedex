@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class Pokemon {
@@ -7,6 +9,7 @@ class Pokemon {
   final int height;
   final String imageUrl;
   final bool isDefault;
+  bool isFavorite;
   final String name;
   final int order;
   final List<int> stats;
@@ -20,6 +23,7 @@ class Pokemon {
     required this.height,
     required this.imageUrl,
     required this.isDefault,
+    this.isFavorite = false,
     required this.name,
     required this.order,
     required this.stats,
@@ -102,4 +106,42 @@ class Pokemon {
 
   @override
   int get hashCode => id.hashCode ^ name.hashCode ^ imageUrl.hashCode;
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'abilites': abilites,
+      'baseExperience': baseExperience,
+      'height': height,
+      'imageUrl': imageUrl,
+      'isDefault': isDefault,
+      'isFavorite': isFavorite,
+      'name': name,
+      'order': order,
+      'stats': stats,
+      'types': types,
+      'weight': weight,
+    };
+  }
+
+  factory Pokemon.fromMap(Map<String, dynamic> map) {
+    return Pokemon(
+      id: map['id'],
+      abilites: List<String>.from(map['abilites']),
+      baseExperience: map['baseExperience'],
+      height: map['height'],
+      imageUrl: map['imageUrl'],
+      isDefault: map['isDefault'],
+      isFavorite: map['isFavorite'],
+      name: map['name'],
+      order: map['order'],
+      stats: List<int>.from(map['stats']),
+      types: List<String>.from(map['types']),
+      weight: map['weight'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Pokemon.fromJson(String source) => Pokemon.fromMap(json.decode(source));
 }

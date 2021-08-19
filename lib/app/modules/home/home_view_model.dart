@@ -51,6 +51,7 @@ class HomeViewModel {
         height: result.height!,
         imageUrl: result.sprites!.other.officialArtwork.frontDefault,
         isDefault: result.isDefault!,
+        isFavorite: false,
         name: result.name!,
         order: result.order!,
         stats: result.stats!.map((e) => e.baseStat).toList(),
@@ -99,6 +100,12 @@ class HomeViewModel {
     var pokemap = {"index": index, "pokemon": pokemon, "pokemons": pokemons};
     return () {
       Modular.to.pushNamed("/pokemon", arguments: pokemap);
+    };
+  }
+
+  VoidCallback loadFavoritePage() {
+    return () {
+      Modular.to.pushNamed("/favorite");
     };
   }
 }

@@ -2,43 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:pokedex/app/app.dart';
-import 'package:pokedex/app/modules/home/components/home_components.dart';
-import 'package:pokedex/app/modules/home/home_view_model.dart';
+import 'package:pokedex/app/modules/favorite/components/poke_favorite_app_bar.dart';
+import 'package:pokedex/app/modules/favorite/favorite_view_model.dart';
 import 'package:pokedex/app/shared/components/components.dart';
 import 'package:rx_notifier/rx_notifier.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+class FavoritePage extends StatefulWidget {
+  const FavoritePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _FavoritePageState createState() => _FavoritePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final _viewmodel = Modular.get<HomeViewModel>();
+class _FavoritePageState extends State<FavoritePage> {
+  final _viewmodel = Modular.get<FavoriteViewModel>();
   final _scrollController = ScrollController();
 
   @override
   void initState() {
-    _viewmodel.getPokemons();
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels >=
-          _scrollController.position.maxScrollExtent) {
-        _viewmodel.nextPage();
-      }
-    });
-    rxObserver(
-      () => _viewmodel.error.value.map(
-        (e) => _viewmodel.showSnackBar(context, e),
-      ),
-    );
+    _viewmodel.getFavoritesPokemon();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 
   @override
@@ -52,7 +35,7 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.topCenter,
               clipBehavior: Clip.none,
               children: [
-                PokeHomeAppBar(),
+                PokeFavoriteAppBar(),
                 Column(
                   children: [
                     SizedBox(height: constraints.maxHeight * 0.3),

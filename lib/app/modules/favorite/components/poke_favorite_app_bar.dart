@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pokedex/app/app.dart';
-import 'package:pokedex/app/modules/home/home_view_model.dart';
+import 'package:pokedex/app/modules/favorite/favorite_view_model.dart';
 
-class PokeHomeAppBar extends StatelessWidget {
-  final _viewmodel = Modular.get<HomeViewModel>();
+class PokeFavoriteAppBar extends StatelessWidget {
+  final _viewmodel = Modular.get<FavoriteViewModel>();
 
-  PokeHomeAppBar({Key? key}) : super(key: key);
+  PokeFavoriteAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class PokeHomeAppBar extends StatelessWidget {
           children: [
             Positioned(
               top: -(constraints.maxHeight / 4),
-              left: constraints.maxWidth * 0.55,
+              right: constraints.maxWidth * 0.55,
               child: Opacity(
                 opacity: 0.1,
                 child: Image.asset(
@@ -35,25 +35,25 @@ class PokeHomeAppBar extends StatelessWidget {
                   Container(
                     color: Colors.transparent,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 20, right: 20),
+                          padding: const EdgeInsets.only(top: 20, left: 20),
                           child: IconButton(
-                            icon: Icon(Icons.arrow_forward, size: 30),
-                            onPressed: _viewmodel.loadFavoritePage(),
+                            icon: Icon(Icons.arrow_back, size: 30),
+                            onPressed: _viewmodel.loadHomePage(),
                           ),
                         ),
                       ],
                     ),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 20),
+                        padding: const EdgeInsets.only(right: 20),
                         child: Text(
-                          "Pokedex",
+                          "Favorites",
                           style: AppTextStyles.textBlack(28),
                         ),
                       ),
