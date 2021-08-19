@@ -16,7 +16,6 @@ class AppTheme extends StatelessWidget {
         accentColor: AppColors.accent,
         backgroundColor: AppColors.white,
         cardColor: AppColors.white,
-        disabledColor: AppColors.lightPrimary,
         errorColor: AppColors.error,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/app/app.dart';
 
-class PokeAppBar extends StatelessWidget {
-  const PokeAppBar({Key? key}) : super(key: key);
+class PokeHomeAppBar extends StatelessWidget {
+  const PokeHomeAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class PokeAppBar extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 20, right: 21),
                           child: IconButton(
-                            icon: Icon(Icons.menu),
+                            icon: Icon(Icons.arrow_forward, size: 30),
                             onPressed: () {},
                           ),
                         ),

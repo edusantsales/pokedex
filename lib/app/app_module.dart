@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:pokedex/app/modules/detail/detail_module.dart';
+import 'package:pokedex/env.dart';
 
-import 'app.dart';
 import 'modules/home/home_module.dart';
 import 'shared/services/local_storage_service.dart';
 
@@ -11,9 +12,7 @@ class AppModule extends Module {
     return [
       Bind.lazySingleton((i) => LocalStorageService()),
       Bind.lazySingleton(
-        (i) => Dio(
-          BaseOptions(baseUrl: AppEnvironment.getInstance()!.apiBaseUrl),
-        ),
+        (i) => Dio(BaseOptions(baseUrl: POKE_API)),
       ),
     ];
   }
@@ -23,6 +22,7 @@ class AppModule extends Module {
     return [
       // ModuleRoute("/", module: SplashModule()),
       ModuleRoute("/", module: HomeModule()),
+      ModuleRoute("/pokemon", module: DetailModule()),
     ];
   }
 }

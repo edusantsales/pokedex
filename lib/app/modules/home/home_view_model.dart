@@ -46,11 +46,16 @@ class HomeViewModel {
       var result = await getPokemonDetail(pokemonDTO.name);
       var pokemon = Pokemon(
         id: result.id!,
+        abilites: result.abilities!.map((e) => e.ability.name).toList(),
+        baseExperience: result.baseExperience!,
+        height: result.height!,
+        imageUrl: result.sprites!.other.officialArtwork.frontDefault,
+        isDefault: result.isDefault!,
         name: result.name!,
-        image: Image.network(
-          result.sprites!.other.officialArtwork.frontDefault,
-        ),
+        order: result.order!,
+        stats: result.stats!.map((e) => e.baseStat).toList(),
         types: result.types!.map((e) => e.type.name).toList(),
+        weight: result.weight!,
       );
       if (!pokemons.contains(pokemon.id)) {
         pokemons.add(pokemon);
@@ -88,5 +93,12 @@ class HomeViewModel {
         ),
       ),
     ).then((value) => loadingWidget.value = value);
+  }
+
+  VoidCallback loadDetailPage(int index, Pokemon pokemon) {
+    var pokemap = {"index": index, "pokemon": pokemon, "pokemons": pokemons};
+    return () {
+      Modular.to.pushNamed("/pokemon", arguments: pokemap);
+    };
   }
 }

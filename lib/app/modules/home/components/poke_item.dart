@@ -4,14 +4,9 @@ import 'package:pokedex/app/app_text_styles.dart';
 import 'package:pokedex/app/shared/entities/pokemon.dart';
 
 class PokeItem extends StatelessWidget {
-  final int index;
   final Pokemon pokemon;
 
-  const PokeItem({
-    Key? key,
-    required this.index,
-    required this.pokemon,
-  }) : super(key: key);
+  const PokeItem({Key? key, required this.pokemon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,18 +17,28 @@ class PokeItem extends StatelessWidget {
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20)),
-            color: this.pokemon.getColorType()!,
+            gradient: LinearGradient(
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+              colors: [
+                this.pokemon.getColorType()!.withOpacity(0.75),
+                this.pokemon.getColorType()!,
+              ],
+            ),
           ),
           child: Stack(
             children: [
               Container(
                 alignment: Alignment.bottomRight,
-                child: Opacity(
-                  opacity: 0.2,
-                  child: Image.asset(
-                    AppImages.whitePokeball,
-                    height: constraints.maxHeight * 0.5,
-                    width: constraints.maxWidth * 0.5,
+                child: Hero(
+                  tag: pokemon.name + "-pokeball",
+                  child: Opacity(
+                    opacity: 0.2,
+                    child: Image.asset(
+                      AppImages.whitePokeball,
+                      height: constraints.maxHeight * 0.5,
+                      width: constraints.maxWidth * 0.5,
+                    ),
                   ),
                 ),
               ),
@@ -42,14 +47,17 @@ class PokeItem extends StatelessWidget {
                 child: Container(
                   height: constraints.maxHeight * 0.5,
                   width: constraints.maxWidth * 0.5,
-                  child: this.pokemon.image,
+                  child: Hero(
+                    tag: pokemon.name,
+                    child: Image.network(this.pokemon.imageUrl),
+                  ),
                 ),
               ),
               Container(
                 alignment: Alignment.topLeft,
                 padding: const EdgeInsets.all(8),
                 child: Text(
-                  this.pokemon.getFormattedName(this.pokemon.name),
+                  this.pokemon.getFormattedString(this.pokemon.name),
                   style: AppTextStyles.textWhite(16),
                 ),
               ),
@@ -67,7 +75,7 @@ class PokeItem extends StatelessWidget {
   Widget showPokemonTypes() {
     List<Widget> widgets = [];
     this.pokemon.types.forEach((element) {
-      var typeName = this.pokemon.getFormattedName(element);
+      var typeName = this.pokemon.getFormattedString(element);
       widgets.add(
         Column(
           children: <Widget>[
@@ -78,14 +86,14 @@ class PokeItem extends StatelessWidget {
                 color: Colors.white30,
               ),
               child: Padding(
-                padding: const EdgeInsets.all(6),
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
                 child: Text(
                   typeName.trim(),
                   style: AppTextStyles.textWhite(12),
                 ),
               ),
             ),
-            SizedBox(height: 6)
+            SizedBox(height: 6),
           ],
         ),
       );

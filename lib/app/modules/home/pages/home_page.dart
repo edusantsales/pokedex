@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:pokedex/app/app.dart';
+import 'package:pokedex/app/modules/home/components/home_components.dart';
 import 'package:pokedex/app/modules/home/home_view_model.dart';
-import 'package:pokedex/app/shared/components/components.dart';
-import 'package:pokedex/app/shared/components/poke_item.dart';
 import 'package:rx_notifier/rx_notifier.dart';
 
 class HomePage extends StatefulWidget {
@@ -52,7 +51,7 @@ class _HomePageState extends State<HomePage> {
               alignment: Alignment.topCenter,
               clipBehavior: Clip.none,
               children: [
-                PokeAppBar(),
+                PokeHomeAppBar(),
                 Column(
                   children: [
                     SizedBox(height: constraints.maxHeight * 0.3),
@@ -80,11 +79,11 @@ class _HomePageState extends State<HomePage> {
                                         position: index,
                                         child: ScaleAnimation(
                                           child: GestureDetector(
-                                            onTap: () {},
-                                            child: PokeItem(
-                                              index: index,
-                                              pokemon: pokemon,
+                                            onTap: _viewmodel.loadDetailPage(
+                                              index,
+                                              pokemon,
                                             ),
+                                            child: PokeItem(pokemon: pokemon),
                                           ),
                                         ),
                                       );
