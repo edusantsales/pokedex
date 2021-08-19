@@ -2,18 +2,32 @@ import 'package:flutter/material.dart';
 
 class Pokemon {
   final int id;
-  final String name;
+  final List<String> abilites;
+  final int baseExperience;
+  final int height;
   final String imageUrl;
+  final bool isDefault;
+  final String name;
+  final int order;
+  final List<int> stats;
   final List<String> types;
+  final int weight;
 
   Pokemon({
     required this.id,
-    required this.name,
+    required this.abilites,
+    required this.baseExperience,
+    required this.height,
     required this.imageUrl,
+    required this.isDefault,
+    required this.name,
+    required this.order,
+    required this.stats,
     required this.types,
+    required this.weight,
   });
 
-  String getFormattedName(String value) {
+  String getFormattedString(String value) {
     return value.replaceFirst(
       value.characters.first,
       value.characters.first.toUpperCase(),
@@ -21,8 +35,22 @@ class Pokemon {
     );
   }
 
+  double getFormattedHeightWeight(int value) {
+    var result = (value / 10.0);
+    return result;
+  }
+
+  String getFormattedList(List<String> values) {
+    late String result = "";
+    values.forEach((element) {
+      var formattedString = getFormattedString(element) + ", ";
+      result += formattedString;
+    });
+    return result;
+  }
+
   Color? getColorType() {
-    switch (getFormattedName(this.types.first)) {
+    switch (getFormattedString(this.types.first)) {
       case 'Normal':
         return Colors.brown[400];
       case 'Fire':
