@@ -6,6 +6,8 @@ import 'package:pokedex/app/shared/entities/entities.dart';
 import 'package:rx_notifier/rx_notifier.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 
+import 'information_page.dart';
+
 class DetailPage extends StatefulWidget {
   final Map<String, Object> pokemap;
 
@@ -60,6 +62,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   @override
   void dispose() {
     _spinPokeball.dispose();
+    _growUpPokemon.dispose();
     super.dispose();
   }
 
@@ -114,7 +117,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                   offset: Offset(0, -16),
                 ).transform,
                 child: Text(
-                  _viewmodel.pokemon.value.getFormattedName(
+                  _viewmodel.pokemon.value.getFormattedString(
                     _viewmodel.pokemon.value.name,
                   ),
                   style: AppTextStyles.textSemiWhite(22),
@@ -142,9 +145,6 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
         body: LayoutBuilder(
           builder: (context, constraints) => Stack(
             children: [
-              Container(
-                height: constraints.maxHeight * 0.4,
-              ),
               SlidingSheet(
                 cornerRadius: 30,
                 elevation: 0,
@@ -165,6 +165,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 builder: (context, state) {
                   return Container(
                     height: constraints.maxHeight,
+                    width: constraints.maxWidth,
+                    child: InformationPage(),
                   );
                 },
               ),
@@ -211,11 +213,13 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                               tag: index == _viewmodel.pokemonIndex
                                   ? _viewmodel.pokemon.value.name
                                   : "pokemon-$index",
-                              child: Image.network(
-                                _viewmodel.pokemons[index].imageUrl,
-                                color: index == _viewmodel.pokemonIndex
-                                    ? null
-                                    : Colors.black.withOpacity(0.5),
+                              child: IgnorePointer(
+                                child: Image.network(
+                                  _viewmodel.pokemons[index].imageUrl,
+                                  color: index == _viewmodel.pokemonIndex
+                                      ? null
+                                      : Colors.black.withOpacity(0.5),
+                                ),
                               ),
                             ),
                           ),
@@ -225,6 +229,9 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                     onPageChanged: (index) {
                       _viewmodel.pokemonIndex = index;
                       _viewmodel.pokemon.value = _viewmodel.pokemons[index];
+                      _viewmodel.getPokemonSpecieInfo(
+                        _viewmodel.pokemon.value.id.toString(),
+                      );
                     },
                   ),
                 ),
@@ -239,7 +246,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
   Widget showPokemonTypes() {
     List<Widget> widgets = [];
     _viewmodel.pokemon.value.types.forEach((element) {
-      var typeName = _viewmodel.pokemon.value.getFormattedName(element);
+      var typeName = _viewmodel.pokemon.value.getFormattedString(element);
       widgets.add(
         Row(
           children: <Widget>[
@@ -250,7 +257,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 color: Colors.white30,
               ),
               child: Padding(
-                padding: const EdgeInsets.all(6),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 child: Text(
                   typeName.trim(),
                   style: AppTextStyles.textWhite(12),
