@@ -4,6 +4,7 @@ import 'package:pokedex/app/modules/detail/detail_module.dart';
 import 'package:pokedex/env.dart';
 
 import 'modules/home/home_module.dart';
+import 'modules/splash/splash_module.dart';
 import 'shared/services/local_storage_service.dart';
 
 class AppModule extends Module {
@@ -20,8 +21,8 @@ class AppModule extends Module {
   @override
   List<ModularRoute> get routes {
     return [
-      // ModuleRoute("/", module: SplashModule()),
-      ModuleRoute("/", module: HomeModule()),
+      ModuleRoute("/", module: SplashModule()),
+      ModuleRoute("/home", module: HomeModule()),
       ModuleRoute("/pokemon", module: DetailModule()),
     ];
   }
