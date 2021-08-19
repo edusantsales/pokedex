@@ -66,4 +66,32 @@ class PokemonRepository implements IPokemonRepository {
         ? Left(AppException("Nenhum pokemon foi retornado da api."))
         : Right(result);
   }
+
+  @override
+  FutureEitherSpecie getSpecie(String pokemonId) async {
+    SpecieResponseDTO? result;
+    try {
+      final response = await dio.get("/pokemon-species/$pokemonId");
+      if (response.statusCode == HttpStatus.ok) {
+        result = SpecieResponseDTO.fromMap(response.data);
+      }
+    } on DioError catch (e) {
+      if (e.response!.statusCode! >= 300) {
+        return Left(
+          AppException(
+            "Erro ao tentar consultar as informações da espécie do pokemon.",
+            statusCode: e.response!.statusCode,
+            statusMessage: e.response!.statusMessage,
+          ),
+        );
+      }
+    }
+    return result == null
+        ? Left(
+            AppException(
+              "Nenhum informação da espécie de pokemon foi retornado da api.",
+            ),
+          )
+        : Right(result);
+  }
 }
