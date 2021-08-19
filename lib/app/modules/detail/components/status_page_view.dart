@@ -103,7 +103,7 @@ class StatusPageView extends StatelessWidget {
                         PokeStatusBar(widthFactor: _viewmodel.pokemon.value.stats[5] / 160),
                         PokeStatusBar(
                             widthFactor:
-                                _viewmodel.getPokemonTotalStatus(_viewmodel.pokemon.value.stats) / 600),
+                                _viewmodel.getPokemonTotalStatus(_viewmodel.pokemon.value.stats) / 960),
                       ],
                     ),
                   ),
