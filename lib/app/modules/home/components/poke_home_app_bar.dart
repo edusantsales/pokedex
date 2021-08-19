@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pokedex/app/app.dart';
+import 'package:pokedex/app/modules/home/home_view_model.dart';
 
 class PokeHomeAppBar extends StatelessWidget {
-  const PokeHomeAppBar({Key? key}) : super(key: key);
+  final _viewmodel = Modular.get<HomeViewModel>();
+
+  PokeHomeAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +38,10 @@ class PokeHomeAppBar extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 20, right: 21),
+                          padding: const EdgeInsets.only(top: 20, right: 20),
                           child: IconButton(
                             icon: Icon(Icons.arrow_forward, size: 30),
-                            onPressed: () {},
+                            onPressed: _viewmodel.loadFavoritePage(),
                           ),
                         ),
                       ],
