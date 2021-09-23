@@ -1,5 +1,5 @@
 {
-    "version": "1.0.1",
+    "version": "1.0.0",
     "configurations": [
         {
             "name": "development",
@@ -17,7 +17,6 @@
             "name": "production",
             "request": "launch",
             "type": "dart",
-            "args": ["--release"],
             "program": "lib/main.dart"
         }
     ]
