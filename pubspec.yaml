@@ -43,6 +43,8 @@ flutter:
     - lib/assets/images/
 
 vars:
+  enable_web: flutter config --enable-web
+  no_enable_web: flutter config --no-enable-web
   clean: flutter clean
   get: flutter pub get
   pkg: flutter packages get
@@ -54,6 +56,8 @@ vars:
   dev: lib/main.dart
 
 scripts:
+  enable_web: $enable_web
+  no_enable_web: $no_enable_web
   clean: $clean & $get & $pkg
   watch: $runner watch --delete-conflicting-outputs
   build_runner: $runner build --delete-conflicting-outputs
