@@ -1,24 +1,26 @@
 {
-    "version": "1.0.1",
+    "version": "1.0.2",
     "configurations": [
         {
-            "name": "development",
+            "name": "dev",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main.dart"
+            "program": "lib/main.dart",
+            "args": [],
         },
         {
-            "name": "homologation",
+            "name": "homol",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main.dart"
+            "program": "lib/main.dart",
+            "args": [],
         },
         {
-            "name": "production",
+            "name": "prod",
             "request": "launch",
             "type": "dart",
-            "args": ["--release"],
-            "program": "lib/main.dart"
+            "program": "lib/main.dart",
+            "args": [],
         }
     ]
 }
