@@ -30,7 +30,8 @@ jobs:
           reporter: flutter-json
       - uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
         with:
-          min_coverage: 0  
+          min_coverage: 0
+
     build_appbundle:
       name: Build Flutter (Android)
       needs: [flutter_test]
@@ -45,12 +46,13 @@ jobs:
             channel: "stable"
         - run: flutter pub get
         - run: flutter clean
-        - run: flutter build appbundle
+        - run: flutter build appbundle -t lib/main.dart 
         - name: Upload appbundle
           uses: actions/upload-artifact@v2.1.4
           with:
             name: appbundle
             path: build/app/outputs/bundle/release/app-release.aab
+
     build_ios:
       name: Build Flutter (iOS)
       needs: [flutter_test]
@@ -65,5 +67,5 @@ jobs:
             channel: "stable"
         - run: flutter pub get
         - run: flutter clean
-        - run: flutter build ios --release --no-codesign  
+        - run: flutter build ios --release --no-codesign -t lib/main.dart  
       
