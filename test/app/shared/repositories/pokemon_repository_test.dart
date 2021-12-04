@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:pokedex/app/settings/constants/constants.dart';
 import 'package:pokedex/app/shared/dtos/dtos.dart';
 import 'package:pokedex/app/shared/exceptions/exceptions.dart';
 import 'package:pokedex/app/shared/repositories/repositories.dart';
-import 'package:pokedex/env.dart';
 
 void main() {
   final dio = Dio(BaseOptions(baseUrl: POKE_API));

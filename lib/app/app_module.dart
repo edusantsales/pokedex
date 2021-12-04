@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:pokedex/app/modules/detail/detail_module.dart';
-import 'package:pokedex/env.dart';
 
 import 'modules/favorite/favorite_module.dart';
 import 'modules/home/home_module.dart';
 import 'modules/splash/splash_module.dart';
+import 'settings/constants/constants.dart';
 import 'shared/services/local_storage_service.dart';
 
 class AppModule extends Module {

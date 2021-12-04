@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:pokedex/app/settings/constants/constants.dart';
 import 'package:pokedex/app/shared/dtos/dtos.dart';
 import 'package:pokedex/app/shared/exceptions/exceptions.dart';
 import 'package:pokedex/app/shared/interfaces/ipokemon_repository.dart';
-import 'package:pokedex/env.dart';
 
 class PokemonRepository implements IPokemonRepository {
   final Dio dio;
