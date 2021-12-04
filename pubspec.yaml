@@ -41,3 +41,23 @@ flutter:
 
   assets:
     - lib/assets/images/
+
+vars:
+  clean: flutter clean
+  get: flutter pub get
+  pkg: flutter packages get
+  runner: flutter pub run build_runner
+  icon: flutter pub run flutter_launcher_icons:main
+  appbundle: flutter build appbundle -t
+  apk: flutter build apk -t
+  ios: flutter build ios -t
+  dev: lib/main.dart
+
+scripts:
+  clean: $clean & $get & $pkg
+  watch: $runner watch --delete-conflicting-outputs
+  build_runner: $runner build --delete-conflicting-outputs
+  build_icon: $icon
+  build_android_dev: $appbundle $dev
+  build_apk_dev: $apk $dev
+  build_ios_dev: $ios $dev
