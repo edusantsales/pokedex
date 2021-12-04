@@ -1,0 +1,29 @@
+{
+    "recommendations": [
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-complete-tag",
+        "formulahendry.auto-rename-tag",
+        "aaron-bond.better-comments",
+        "coenraads.bracket-pair-colorizer-2",
+        "adpyke.codesnap",
+        "aeschli.vscode-css-formatter",
+        "dart-code.dart-code",
+        "bendixma.dart-data-class-generator",
+        "usernamehw.errorlens",
+        "dart-code.flutter",
+        "rodrigorahman.flutter-dart-utils",
+        "pomber.git-file-history",
+        "mhutchie.git-graph",
+        "vector-of-bool.gitflow",
+        "eamodio.gitlens",
+        "ritwickdey.liveserver",
+        "pkief.material-icon-theme",
+        "ms-vscode.theme-materialkit",
+        "eg2.vscode-npm-script",
+        "rocketseat.theme-omni",
+        "ms-ceintl.vscode-language-pack-pt-br",
+        "shan.code-settings-sync",
+        "visualstudioexptteam.vscodeintellicode",
+        "wakatime.vscode-wakatime"
+    ]
+}
